@@ -1,1 +1,1 @@
-# bamboozling-button-grid
+#[ModKit Wiki](../../wiki)
