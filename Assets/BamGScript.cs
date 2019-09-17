@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,14 +19,16 @@ public class BamGScript : MonoBehaviour {
     private string[][] alph = new string[3][] { new string[26] { "A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"},
                                                 new string[26] { "ALPHA", "BRAVO", "CHARLIE", "DELTA", "ECHO", "FOXTROT", "GOLF", "HOTEL", "INDIA", "JULIET", "KILO", "LIMA", "MIKE",
                                                                  "NOVEMBER", "OSCAR", "PAPA", "QUEBEC", "ROMEO", "SIERRA", "TANGO", "UNIFORM", "VICTOR", "WHISKEY", "XRAY", "YANKEE", "ZULU" },
-                                                new string[104]{ "ALFA", "BRAVOH", "CHARLEE", "DELLTA", "EKO", "FOKSTROT", "GOLPH", "HOATEL", "INDYA", "JOOLIET", "KEYLO", "LEEMA", "MYKE",
+                                                new string[130]{ "ALFHA", "BRAVOH", "CHARLEE", "DELLTA", "EKO", "FOKSTROT", "GOLPH", "HOATEL", "INDYA", "JOOLIET", "KEYLO", "LEEMA", "MYKE",
                                                                  "NOBEMVER", "OSCAH", "PAPPA", "QEUBEC", "ROMIO", "SCIERA", "TANKO", "YUNIFORM", "VICKTOR", "WISKEY", "EKSRAY", "YANKIE", "ZOOLU",
-                                                                 "ALPA", "BRAVOE", "CHALLIE", "DELTER", "ECOH", "FOXCHROT", "GOLLF", "HOTELL", "INDEA", "JULYET", "KEELO", "LEYMA", "MAIK",
-                                                                 "NOVEBMER", "OZCAR", "PAPHA", "QUBBEC", "REOMO", "SIARRA", "TONGO", "UNIPHORM", "VICTAH", "WHISKEE", "XRAE", "YANGKEE", "ZULOO",
+                                                                 "ALPA", "BRAVOE", "CHARLY", "DELTER", "ECOH", "FOXCHROT", "GOLLF", "HOTELL", "INDEA", "JULYET", "KEELO", "LEYMA", "MAIK",
+                                                                 "NOVEBMER", "OZCAR", "PAPHA", "QUEBECK", "REOMO", "SIARRA", "TONGO", "UNIPHORM", "VICTAH", "WHISKEE", "XRAE", "YANGKEE", "ZULOO",
                                                                  "ALEPH", "BRAHVO", "CHAALIE", "TELTA", "ECCO", "FOXTROY", "COLF", "OHTEL", "INDIR", "GULIET", "CHILO", "LEMA", "MIC",
                                                                  "NOVEMBAR", "OSKAR", "PAHPAH", "CUEBEC", "ROMYO", "SEERRA", "DANGO", "UNUFORM", "VITCOR", "WHISCEY", "XREI", "YANKY", "ZULLU",
                                                                  "ALPHER", "BRUHVO", "SHARLIE", "OELTA", "EGHO", "POXTROT", "EOLF", "HOTLE", "NDIA", "JULLIET", "QUILO", "LIA", "MIXE",
-                                                                 "NOVENBER", "OSSCAR", "APAP", "QUEBEQ", "ROAMEEOH", "CYERHA", "TNGO", "UNIFROM", "VICTUR", "VVHISKEY", "XARRAY", "IANKEE", "ZUWU"} };
+                                                                 "NOVENBER", "OSSCAR", "FAFA", "QUEBEQ", "RHOMEO", "SYERRA", "TNGO", "UNIFROM", "VICTUR", "VVHISKEY", "XARRAY", "IANKEE", "ZUWU",
+                                                                 "AELLFHAH", "BERRARVO", "TCHAALEY", "DERLEDEH", "EQUEAUX", "PHAWXTRT", "GAULTH", "HOUGHTEL", "YNNDEYER", "DGEULIRT", "QUEELOWE", "LEIGHMUR", "MISQUE",
+                                                                 "NOUGHVMB", "AUSQUE", "PARGHPEH", "KWUBBECH", "ROAMEEOH", "CYERHA", "TAENGKOW", "EUNIFAWM", "VYCHTOUR", "UISSQUAY", "ECHSREIH", "EANGQUI", "ZOUGHLEW" } };
     private string[] properties = new string[100] { "Y4", "G2", "R1", "B5", "G1", "24", "Y3", "13", "R5", "Y2",
                                                     "G1", "B2", "G5", "B3", "R4", "45", "Y1", "R2", "23", "B4",
                                                     "R4", "34", "R2", "G3", "Y5", "G1", "B4", "G4", "B2", "12",
@@ -269,6 +271,7 @@ public class BamGScript : MonoBehaviour {
         if (moduleSolved == false)
         {
             List<int> initlist = new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
+            List<string> order = new List<string> { };
             foreach (int num in alreadypressed)
             {
                 initlist.Remove(num);
@@ -279,8 +282,10 @@ public class BamGScript : MonoBehaviour {
             {
                 int r = UnityEngine.Random.Range(0, initlist.Count);
                 ordering.Add(initlist[r]);
+                order.Add((initlist[r] + 1).ToString());
                 initlist.RemoveAt(r);
             }
+            Debug.Log(string.Join(", ", order.ToArray()));
             foreach (List<string> list in buttoncycle)
             {
                 list.Clear();
@@ -302,7 +307,7 @@ public class BamGScript : MonoBehaviour {
                     collog[i][j] = colours[textrand[i][j][3]];
                     textrand[i][j][2] = UnityEngine.Random.Range(0, 4);
                     textrand[i][j][1] = UnityEngine.Random.Range(0, 3);
-                    textrand[i][j][0] = UnityEngine.Random.Range(0, 104);
+                    textrand[i][j][0] = UnityEngine.Random.Range(0, 130);
                     if (textrand[i][j][1] != 2)
                     {
                         textrand[i][j][0] %= 26;
@@ -354,7 +359,7 @@ public class BamGScript : MonoBehaviour {
                     if ("RYGB".Contains(propselect[1][i][0].ToString()))
                     {
                         buttoncycle[ordering[i]]["12345".IndexOf(propselect[0][i][1].ToString())] = propselect[0][i][0].ToString();
-                        if (propselect[0][i][1] == propselect[1][i][1])
+                        if (propselect[0][i][1] == propselect[1][i][1] && propselect[0][i][0] != propselect[1][i][0])
                         {
                             buttoncycle[ordering[i]]["51234".IndexOf(propselect[1][i][1].ToString())] = buttoncycle[ordering[i]]["12345".IndexOf(propselect[0][i][1].ToString())];
                             propselect[1][i] = "//";                           
@@ -369,7 +374,7 @@ public class BamGScript : MonoBehaviour {
                         buttoncycle[ordering[i]]["12345".IndexOf(propselect[0][i][1].ToString())] = propselect[0][i][0].ToString();
                         if (propselect[0][i][1] == propselect[1][i][1])
                         {
-                            buttoncycle[ordering[i]]["12345".IndexOf(propselect[1][i][0].ToString())] = buttoncycle[ordering[i]]["12345".IndexOf(propselect[1][i][1].ToString())];
+                            buttoncycle[ordering[i]]["12345".IndexOf(propselect[1][i][0].ToString())] = propselect[0][i][0].ToString();
                         }
                         else
                         {
@@ -382,7 +387,14 @@ public class BamGScript : MonoBehaviour {
                     if ("RYGB".Contains(propselect[1][i][0].ToString()))
                     {
                         buttoncycle[ordering[i]]["12345".IndexOf(propselect[1][i][1].ToString())] = propselect[1][i][0].ToString();
-                        buttoncycle[ordering[i]]["12345".IndexOf(propselect[0][i][0].ToString())] = buttoncycle[ordering[i]]["12345".IndexOf(propselect[0][i][1].ToString())];
+                        if (propselect[0][i][1] == propselect[1][i][1])
+                        {
+                            buttoncycle[ordering[i]]["12345".IndexOf(propselect[0][i][0].ToString())] = propselect[1][i][0].ToString();
+                        }
+                        else
+                        {
+                            buttoncycle[ordering[i]]["12345".IndexOf(propselect[0][i][1].ToString())] = buttoncycle[ordering[i]]["12345".IndexOf(propselect[0][i][0].ToString())];
+                        }
                     }
                     else if (propselect[0][i][1] == propselect[1][i][1])
                     {
