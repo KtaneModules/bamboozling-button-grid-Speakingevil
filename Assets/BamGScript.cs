@@ -109,7 +109,7 @@ public class BamGScript : MonoBehaviour {
                     {
                         if (safetynet == false)
                         {
-                            leds[i].material = ledcol[0];
+                            leds[i].material = ledcol[4];
                         }
                         else
                         {
@@ -119,12 +119,13 @@ public class BamGScript : MonoBehaviour {
                     if (safetynet == true)
                     {
                         safetynet = false;
+                        pressable = false;
+                        StartCoroutine(LEDreset());
                     }
                     else
                     {
-                        fullreset = true;
+                        Reset();
                     }
-                    Reset();
                 }
                 else
                 {
@@ -199,11 +200,11 @@ public class BamGScript : MonoBehaviour {
                                     if (safetynet == true)
                                     {
                                         safetynet = false;
+                                        pressable = false;
                                         StartCoroutine(LEDreset());
                                     }
                                     else
                                     {
-                                        fullreset = true;
                                         GetComponent<KMBombModule>().HandleStrike();
                                         Reset();
                                     }
@@ -212,6 +213,7 @@ public class BamGScript : MonoBehaviour {
                             }
                             else
                             {
+                                safetynet = true;
                                 Audio.PlaySoundAtTransform("InputCorrect", transform);
                                 for (int j = 0; j < stageCount + 1; j++)
                                 {
@@ -243,6 +245,14 @@ public class BamGScript : MonoBehaviour {
                         pressCount++;
                     }
                 }
+            }
+        }
+        else if(moduleSolved == true && b == 16)
+        {
+            StopAllCoroutines();
+            foreach (Renderer brend in brends)
+            {
+                brend.material = buttoncol[0];
             }
         }
     }
@@ -486,6 +496,7 @@ public class BamGScript : MonoBehaviour {
     private IEnumerator LEDreset()
     {
         yield return new WaitForSeconds(2);
+        pressable = true;
         for(int i = pressCount + 4; i < 8; i++)
         {
             leds[i].material = ledcol[0];
